@@ -1,0 +1,108 @@
+<!-- <?php
+$servername = "uba.o.e";
+$username = "HAIKU";
+$password = "123456";
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password);
+
+// Check connection
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+mysqli_set_charset($conn,"utf8");
+?> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/4ca46a4711.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://www.phptutorial.net/app/css/style.css">
+    <title>submit</title>
+</head>
+<body class="bg-green-300">
+<main class="absolute inset-x-0 top-30">
+    <form action="logg.php" method="post">
+        <!-- <h1>OUMAN <br> MENÜÜ</h1> -->
+        <div class="font-bold tex">
+            <label for="text">Date :</label>
+            <input class="mb-2" type="text" name="text" id="date">
+            <label for="text">Praad:</label>
+            <input class="mb-2" type="text" name="text" id="praad1">
+            <label for="text">Supp:</label>
+            <input class="mb-2" type="text" name="text" id="praad2">
+            <label for="text">Lisand:</label>
+            <input class="mb-2" type="text" name="text" id="valik">
+            <label for="text">Täis praad hind:</label>
+            <input class="mb-2" type="text" name="text" id="tais_praad">
+            <label for="text">Poolik praad hind:</label>
+            <input class="mb-2" type="text" name="text" id="poolik_praad">
+            <label for="text">Täis supp hind:</label>
+            <input class="mb-2" type="text" name="text" id="tais_supp">
+            <label for="text">Poolik supp hind:</label>
+            <input class="mb-2" type="text" name="text" id="poolik_supp">
+            <label for="text">?:</label>
+            <input class="mb-2" type="text" name="text" id="text">
+            <label for="text">?:</label>
+            <input class="mb-2" type="text" name="text" id="text">
+            <label for="text">?:</label>
+            <input class="mb-2" type="text" name="text" id="text">
+            <label for="text">?:</label>
+            <input class="mb-2" type="text" name="text" id="text">
+            <label for="text">?:</label>
+            <input class="mb-2" type="text" name="text" id="text">
+            <label for="text">?:</label>
+            <input class="mb-2" type="text" name="text" id="text">
+        </div>
+        <section>
+            <button class="bg-green-500 hover:bg-green-400" type="submit" name="submit">submit</button>
+        </section>
+    </form>
+</main>
+</body>
+</html>
+
+<?php
+$servername = "uba.o.e";
+$username = "HAIKU";
+$password = "123456";
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password);
+         
+         // Check connection
+         if($conn === false){
+             die("ERROR: Could not connect. "
+                 . mysqli_connect_error());
+         }
+          
+         // Taking all 5 values from the form data(input)
+         $first_name =  $_REQUEST['first_name'];
+         $last_name = $_REQUEST['last_name'];
+         $gender =  $_REQUEST['gender'];
+         $address = $_REQUEST['address'];
+         $email = $_REQUEST['email'];
+          
+         // Performing insert query execution
+         // here our table name is college
+         $sql = "INSERT INTO college  VALUES ('$first_name',
+             '$last_name','$gender','$address','$email')";
+          
+         if(mysqli_query($conn, $sql)){
+             echo "<h3>data stored in a database successfully."
+                 . " Please browse your localhost php my admin"
+                 . " to view the updated data</h3>";
+  
+             echo nl2br("\n$first_name\n $last_name\n "
+                 . "$gender\n $address\n $email");
+         } else{
+             echo "ERROR: Hush! Sorry $sql. "
+                 . mysqli_error($conn);
+         }
+          
+         // Close connection
+         mysqli_close($conn);
+         ?>
