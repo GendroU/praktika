@@ -1,0 +1,867 @@
+<?php
+$servername = "uba.o.e";
+$username = "HAIKU";
+$password = "123456";
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password);
+
+// Check connection
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+mysqli_set_charset($conn,"utf8");
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/4ca46a4711.js" crossorigin="anonymous"></script>
+   <!-- <script src="cart.js"></script>-->
+    <link rel="stylesheet" href="cart.js">
+    <link rel="stylesheet" href="submit.php">
+    <link rel="stylesheet" href="indexx.css">
+</head>
+<body class="bg-green-200">
+    <div class="px-5 bg-green-300 h-30px pt-3 h-20">
+            <div class="flex w-full justify-between sm:flex-justify-between">
+              <h1 class="text-black-700 font-bold text-4xl sm:float-left">OUMAN</h1>
+              <div class="flex justify-end gap-4 sm:justify-end">
+                <a class="underline underline-offset-1" href="submit.php">LOG IN</a>
+              </div>
+            </div>
+            <div class="flex justify-between justify-center my-8">
+              <div></div>
+                <h1 class="text-4xl text-black-700 font-bold">MENÜÜ</h1>
+            <div class="flex justify-start">
+            <p class="sm:float-right">Praad - 3.60€ <br> praad ½ - 2.90€ <br> Supp - 2.00€ <br> Supp ½ - 1.50€ <br>NB! Prae/supi hinnas <br> sisaldub 2 leivaviilu </p>
+            </div>
+            </div>
+            
+    <div class="grid h-28 grid-rows-auto sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-auto object-center">
+                    <div class="text-black-300 text-center sm:text-left">
+                    <div class="flex-items-center text-2xl mb-2 text-gray-700 font-bold">Esmaspäev-<?php $sql="SELECT * FROM praktika.menu WHERE title='Esmaspäev'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "".$row["date"]. "<br>";
+                      }
+                    } else {
+                      echo "0 results";
+                    }
+                      ?>
+                    </div>
+                    </div>
+                    <div class="h-7 font-bold text-xl">
+                    <?php $sql="SELECT * FROM praktika.menu  WHERE title='Esmaspäev'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "". $row["praad1"]. "<br><br>";
+                      } }
+                      ?> 
+                      </div>
+                <div class="h-24">
+                <div class="h-7 font-bold text-xl mb-2">
+                    <?php $sql="SELECT * FROM praktika.menu  WHERE title='Esmaspäev'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "". $row["praad2"]. "";
+                      } }
+                    
+                      ?> 
+                      </div>
+                      
+                      <p id="demo"></p>
+                      <script>
+                        function myFunction() {
+                          var x = document.getElementById("myBtn")
+                          x.disabled = true;
+                        }
+                      </script>
+                     <div class="h-7 text-xl font-bold">
+                    <div>
+                    <?php $sql="SELECT * FROM praktika.menu  WHERE title='Esmaspäev' AND valik IS NULL"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "". $row["praad1"]. "<br><br>";
+                      }
+                    
+                      ?> 
+                      </div>
+                      </div>
+                      </div>
+                      
+                     <div class="flex justify-start h-6"><a class="hover:bg-blue-200 text-black-700 text-center float-left underline underline-offset-1 h-6" href="submit.php" id="myBtn" oneclick="myFunction">BUY-</a>
+                      <?php $sql="SELECT * FROM praktika.menu  WHERE title='Esmaspäev' AND valik IS NULL"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                     $sql="SELECT * FROM praktika.sook"; 
+                      $result = $conn->query($sql); 
+                          if ($result->num_rows > 0) {
+                          while($row = $result->fetch_assoc()) {
+                           echo "Täispraad  ";
+                            echo "". $row["tais_praad"]. " <br> ";
+                            echo "Pool praadi";
+                            echo "". $row["poolik_praad"]. " <br><br> ";      } 
+                    }}
+                  } 
+                      ?>
+                      </a>
+                      </div>
+                      
+                    <!-- valik -->
+                      <!-- <div class="h-7 text-xl font-bold">
+                      <?php 
+                          $sql="SELECT * FROM praktika.menu  WHERE title='Esmaspäev' AND valik IS NOT NULL"; 
+                          $result = $conn->query($sql);
+                          if ($result->num_rows > 0){
+                        ?>    
+                    <?php $sql="SELECT * FROM praktika.menu  WHERE title='Esmaspäev'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "valik";
+                      } } }
+                      ?> 
+                      </div> -->
+                     <!-- <div class="underline underline-offset-1 hover:bg-blue-200 text-black-70 w-6"> <a href="">-->
+                     <div class="text-black-700 h-8 w-9">
+                    <select id="mylist" class='form-control h-6 w-15'>
+                      <?php
+                    $sql="SELECT valik, valik2 FROM praktika.menu WHERE title='Esmaspäev'"; 
+                     $result = $conn -> query ($sql);
+                     while ($row = mysqli_fetch_array($result)) {
+                      $rows[] = $row;
+                  }
+                  foreach ($rows as $row) {
+                    print "<option value=''></option>";
+                    print "<option value='" . $row['valik'] . "'>" . $row['valik'] . "</option>";
+                    print "<option value='" . $row['valik2'] . "'>" . $row['valik2'] . "</option>";
+                }
+                    ?>
+                      </select>
+                      </div>
+                
+                      <div class="text-black-700 h-8 w-9">
+                      <form id="lisand" action="logg.php" method="POST">    
+                    <select id="lisand" class='form-control h-6 w-15'>
+                      <?php
+                      //$conn = mysqli_connect($servername, $username, $password);
+                    $sql="SELECT poolik_praad FROM praktika.sook"; 
+
+                     $results = $conn -> query ($sql);
+                     while ($row = mysqli_fetch_array($results)) {
+                      $rows[] = $row;
+                    }
+                  foreach ($rows as $row) {
+                    print "<option value='" . $row['poolik_praad']. "'>" . $row['poolik_praad'] . "</option>";
+                  }
+                    ?>
+                    </select>
+                   
+                </form>
+                      </div>
+                      </div>
+                      
+                      <?php 
+if(isset($_POST['submit'])){
+  $valik = $_POST['lisand'];
+  if(!empty($valik)){
+      $query = "INSERT INTO praktika.supp_employee (valik) VALUES('test_riis')";
+      $result = $conn->query($query);
+      if($result){
+        echo "Course is inserted successfully";
+      }else{
+        echo "Nihu läks";
+        // https://codingstatus.com/how-to-insert-select-option-value-in-database-using-php-mysql/
+      } 
+    }
+  }
+?> 
+                     <!-- </div>
+                      <div class="underline underline-offset-1 hover:bg-blue-200 text-black-70 w-9"> -->
+
+                      
+                      <!-- <?php /*$sql="SELECT * FROM praktika.menu  WHERE title='Esmaspäev'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "". $row["valik2"]. "<br>";
+                      } }*/
+                     
+                      ?>  -->
+                      </div> 
+                      <!--</div> -->
+
+                      <div class="w-9">
+                      
+                      <a class="text-black-700 text-xl font-bold text-center" href="" id="myBtn" ><button id="nupp" type="submit">OSTA</button></a>
+                      </div>
+                      <script>
+function my_button_click_handler()
+{
+ document.getElementById('lisand').submit();
+}
+</script>
+<?php 
+if(isset($_POST['submit'])){
+  $valik = $_POST['lisand'];
+  if(!empty($valik)){
+      $query = "INSERT INTO praktika.supp_employee (valik) VALUES('".$valik."')";
+      $result = $conn->query($query);
+      if($result){
+        echo "Course is inserted successfully";
+      }else{
+        echo "Nihu läks";
+      } 
+    }
+  }
+?> 
+                      <div class="text-black-300 text-center sm:text-left">
+                    <div class="flex-items-center text-2xl mb-2 text-gray-700 font-bold">Teisipäev-<?php $sql="SELECT * FROM praktika.menu WHERE title='Teisipäev'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "".$row["date"]. "<br>";
+                      }
+                    } else {
+                      echo "0 results";
+                    }
+                      ?>
+                    </div>
+                    </div>
+                    <div class="h-7 font-bold text-xl">
+                    <?php $sql="SELECT * FROM praktika.menu  WHERE title='Teisipäev'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "". $row["praad1"]. "<br><br>";
+                      } }
+                      ?> 
+                      </div>
+                <div class="h-24">
+                <div class="h-7 font-bold text-xl mb-2">
+                    <?php $sql="SELECT * FROM praktika.menu  WHERE title='Teisipäev'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "". $row["praad2"]. "";
+                      } }
+                    
+                      ?> 
+                      </div>
+                      
+                      <p id="demo"></p>
+                      <script>
+                        function myFunction() {
+                          var x = document.getElementById("myBtn")
+                          x.disabled = true;
+                        }
+                      </script>
+                     <div class="h-7 text-xl font-bold">
+                    <div>
+                    <?php $sql="SELECT * FROM praktika.menu  WHERE title='Teisipäev' AND valik IS NULL"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "". $row["praad1"]. "<br><br>";
+                      }
+                     
+                      ?> 
+                      </div>
+                      </div>
+                      </div>
+                      
+                     <div class="flex justify-start h-6"><a class="hover:bg-blue-200 text-black-700 text-center float-left underline underline-offset-1 h-6" href="submit.php" id="myBtn" oneclick="myFunction">BUY-</a>
+                      <?php 
+                     /*$sql="SELECT * FROM praktika.menu  WHERE title='Teisipäev' AND valik IS NULL"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                    // $sql="SELECT * FROM praktika.sook"; 
+                      $result = $conn->query($sql); 
+                          if ($result->num_rows > 0) {
+                          while($row = $result->fetch_assoc()) {
+                           echo "Täispraad  ";
+                            echo "". $row["tais_praad"]. " <br> ";
+                            echo "Pool praadi";
+                            echo "". $row["poolik_praad"]. " <br><br> ";      } 
+                    }}
+                  } */}
+                      ?>
+                      </a>
+                      </div>
+                      
+                    <!-- valik -->
+                      <!-- <div class="h-7 text-xl font-bold">
+                      <?php 
+                          $sql="SELECT * FROM praktika.menu  WHERE title='Teisipäev' AND valik IS NOT NULL"; 
+                          $result = $conn->query($sql);
+                          if ($result->num_rows > 0){
+                        ?>    
+                    <?php /*$sql="SELECT * FROM praktika.menu  WHERE title='Teisipäev'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        //echo "valik";
+                      } } */}
+                    
+                      ?> 
+                      </div> -->
+                     <!-- <div class="underline underline-offset-1 hover:bg-blue-200 text-black-70 w-6"> <a href="">-->
+                     <div class="text-black-700 h-8 w-9">
+                    <select id="mylist" onchange="myFunction()" class='form-control h-6 w-15'>
+                      <?php
+                      $rows=(array) null;
+                    $sql="SELECT DISTINCT valik, valik2 FROM praktika.menu WHERE id=2"; 
+                     $result = $conn -> query ($sql);
+                     while ($row = mysqli_fetch_array($result)) {
+                      $rows[] = $row;
+                  }
+                  foreach ($rows as $row) {
+                    print "<option value=''></option>";
+                    print "<option value='" . $row['valik'] . "'>" . $row['valik'] . "</option>";
+                    print "<option value='" . $row['valik2'] . "'>" . $row['valik2'] . "</option>";
+                }
+                     /* $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                     //foreach($)
+                      while($row = $result->fetch_assoc()) {
+                      echo json_encode($row["valik"]). "<br>";
+                        //  print_r ("". $row["valik"]. "\n <br>");
+                      // print_r("<br>\n". $row["valik2"]. "<br>");
+                      } }
+                    */
+                    //$conn->close();
+                    ?>
+                      </select>
+                    
+                      </div>
+                      
+                      <div class="text-black-700 h-8 w-9">
+                    <select id="mylist1" onchange="myFunction1()" class='form-control h-6 w-15'>
+                      <?php
+                      $rows=(array) null;
+                      //$conn = mysqli_connect($servername, $username, $password);
+                      $sql="SELECT poolik_praad FROM praktika.sook"; 
+
+                     $results = $conn -> query ($sql);
+                     while ($row = mysqli_fetch_array($results)) {
+                      $rows[] = $row;
+                    }
+                    print "<option value=''></option>";
+                    foreach ($rows as $row) {
+                                        print "<option value='" . $row['poolik_praad']. "'>" . $row['poolik_praad'] . "</option>";
+
+                  }
+                    ?>
+                    </select>
+                    
+                      </div>
+                      </div>
+                      
+                     <!-- </div>
+                      <div class="underline underline-offset-1 hover:bg-blue-200 text-black-70 w-9"> -->
+
+                      
+                      <!-- <?php /*$sql="SELECT * FROM praktika.menu  WHERE title='Esmaspäev'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "". $row["valik2"]. "<br>";
+                      } }*/
+                     
+                      ?>  -->
+                      </div> 
+                      <!--</div> -->
+
+                      <div class="w-9">
+                      <a class="text-black-700 text-xl font-bold text-center" href="" id="myBtn" oneclick="myFunction"><button>OSTA</button></a>
+                      </div>
+
+                      <div class="text-black-300 text-center sm:text-left">
+                    <div class="flex-items-center text-2xl mb-2 text-gray-700 font-bold">Kolmapäev-<?php $sql="SELECT * FROM praktika.menu WHERE title='Kolmapäev'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "".$row["date"]. "<br>";
+                      }
+                    } else {
+                      echo "0 results";
+                    }
+                      ?>
+                    </div>
+                    </div>
+                    <div class="h-7 font-bold text-xl">
+                    <?php $sql="SELECT * FROM praktika.menu  WHERE title='Kolmapäev'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "". $row["praad1"]. "<br><br>";
+                      } }
+                      ?> 
+                      </div>
+                <div class="h-24">
+                <div class="h-7 font-bold text-xl mb-2">
+                    <?php $sql="SELECT * FROM praktika.menu  WHERE title='kolmapäev'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "". $row["praad2"]. "";
+                      } }
+                    
+                      ?> 
+                      </div>
+                      
+                      <p id="demo"></p>
+                      <script>
+                        function myFunction() {
+                          var x = document.getElementById("myBtn")
+                          x.disabled = true;
+                        }
+                      </script>
+                     <div class="h-7 text-xl font-bold">
+                    <div>
+                    <?php $sql="SELECT * FROM praktika.menu  WHERE title='Kolmapäev' AND valik IS NULL"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "". $row["praad1"]. "<br><br>";
+                      }
+                    
+                      ?> 
+                      </div>
+                      </div>
+                      </div>
+                      
+                     <div class="flex justify-start h-6"><a class="hover:bg-blue-200 text-black-700 text-center float-left underline underline-offset-1 h-6" href="submit.php" id="myBtn" oneclick="myFunction">BUY-</a>
+                      <?php $sql="SELECT * FROM praktika.menu  WHERE title='Kolmapäev' AND valik IS NULL"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                     $sql="SELECT * FROM praktika.sook"; 
+                      $result = $conn->query($sql); 
+                          if ($result->num_rows > 0) {
+                          while($row = $result->fetch_assoc()) {
+                           echo "Täispraad  ";
+                            echo "". $row["tais_praad"]. " <br> ";
+                            echo "Pool praadi";
+                            echo "". $row["poolik_praad"]. " <br><br> ";      } 
+                    }}
+                  } 
+                      ?>
+                      </a>
+                      </div>
+                      
+                    <!-- valik -->
+                      <!-- <div class="h-7 text-xl font-bold">
+                      <?php 
+                          $sql="SELECT * FROM praktika.menu  WHERE title='Kolmapäev' AND valik IS NOT NULL"; 
+                          $result = $conn->query($sql);
+                          if ($result->num_rows > 0){
+                        ?>    
+                    <?php $sql="SELECT * FROM praktika.menu  WHERE title='Kolmapäev'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "valik";
+                      } } }
+                    
+                      ?> 
+                      </div> -->
+                     <!-- <div class="underline underline-offset-1 hover:bg-blue-200 text-black-70 w-6"> <a href="">-->
+                     <div class="text-black-700 h-8 w-9">
+                     <select id="mylist" onchange="myFunction()" class='form-control h-6 w-15'>
+                      <?php
+                      $rows=(array) null;
+                    $sql="SELECT DISTINCT valik, valik2 FROM praktika.menu WHERE id=3"; 
+                     $result = $conn -> query ($sql);
+                     while ($row = mysqli_fetch_array($result)) {
+                      $rows[] = $row;
+                  }
+                  foreach ($rows as $row) {
+                    print "<option value=''></option>";
+                    print "<option value='" . $row['valik'] . "'>" . $row['valik'] . "</option>";
+                    print "<option value='" . $row['valik2'] . "'>" . $row['valik2'] . "</option>";
+                }
+                     /* $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                     //foreach($)
+                      while($row = $result->fetch_assoc()) {
+                      echo json_encode($row["valik"]). "<br>";
+                        //  print_r ("". $row["valik"]. "\n <br>");
+                      // print_r("<br>\n". $row["valik2"]. "<br>");
+                      } }
+                    */
+                    //$conn->close();
+                    ?>
+                      </select>
+                    
+                      </div>
+                      
+                      <div class="text-black-700 h-8 w-9">
+                    <select id="mylist1" onchange="myFunction1()" class='form-control h-6 w-15'>
+                      <?php
+                      //$conn = mysqli_connect($servername, $username, $password);
+                    $sql="SELECT poolik_praad FROM praktika.sook"; 
+
+                     $results = $conn -> query ($sql);
+                     while ($row = mysqli_fetch_array($results)) {
+                      $rows[] = $row;
+                    }
+                  foreach ($rows as $row) {
+                    print "<option value='" . $row['poolik_praad']. "'>" . $row['poolik_praad'] . "</option>";
+
+                  }
+                    ?>
+                    </select>
+                    
+                      </div>
+                      </div>
+                      
+                     <!-- </div>
+                      <div class="underline underline-offset-1 hover:bg-blue-200 text-black-70 w-9"> -->
+
+                      
+                      <!-- <?php /*$sql="SELECT * FROM praktika.menu  WHERE title='Esmaspäev'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "". $row["valik2"]. "<br>";
+                      } }*/
+                     
+                      ?>  -->
+                      </div> 
+                      <!--</div> -->
+
+                      <div class="w-9">
+                      <a class="text-black-700 text-xl font-bold text-center" href="" id="myBtn" oneclick="myFunction"><button>OSTA</button></a>
+                      </div>
+                    
+
+                      <div class="text-black-300 text-center sm:text-left">
+                    <div class="flex-items-center text-2xl mb-2 text-gray-700 font-bold">Neljapäev-<?php $sql="SELECT * FROM praktika.menu WHERE title='Neljapäev'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "".$row["date"]. "<br>";
+                      }
+                    } else {
+                      echo "0 results";
+                    }
+                      ?>
+                    </div>
+                    </div>
+                    <div class="h-7 font-bold text-xl">
+                    <?php $sql="SELECT * FROM praktika.menu  WHERE title='Neljapäev'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "". $row["praad1"]. "<br><br>";
+                      } }
+                      ?> 
+                      </div>
+                <div class="h-24">
+                <div class="h-7 font-bold text-xl mb-2">
+                    <?php $sql="SELECT * FROM praktika.menu  WHERE title='Neljapäev'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "". $row["praad2"]. "";
+                      } }
+                    
+                      ?> 
+                      </div>
+                      
+                      <p id="demo"></p>
+                      <script>
+                        function myFunction() {
+                          var x = document.getElementById("myBtn")
+                          x.disabled = true;
+                        }
+                      </script>
+                     <div class="h-7 text-xl font-bold">
+                    <div>
+                    <?php $sql="SELECT * FROM praktika.menu  WHERE title='Neljapäev' AND valik IS NULL"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "". $row["praad1"]. "<br><br>";
+                      }
+                    
+                      ?> 
+                      </div>
+                      </div>
+                      </div>
+                      
+                     <div class="flex justify-start h-6"><a class="hover:bg-blue-200 text-black-700 text-center float-left underline underline-offset-1 h-6" href="submit.php" id="myBtn" oneclick="myFunction">BUY-</a>
+                      <?php $sql="SELECT * FROM praktika.menu  WHERE title='Neljapäev' AND valik IS NULL"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                     $sql="SELECT * FROM praktika.sook"; 
+                      $result = $conn->query($sql); 
+                          if ($result->num_rows > 0) {
+                          while($row = $result->fetch_assoc()) {
+                           echo "Täispraad  ";
+                            echo "". $row["tais_praad"]. " <br> ";
+                            echo "Pool praadi";
+                            echo "". $row["poolik_praad"]. " <br><br> ";      } 
+                    }}
+                  } 
+                      ?>
+                      </a>
+                      </div>
+                      
+                    <!-- valik -->
+                      <!-- <div class="h-7 text-xl font-bold">
+                      <?php 
+                          $sql="SELECT * FROM praktika.menu  WHERE title='Neljapäev' AND valik IS NOT NULL"; 
+                          $result = $conn->query($sql);
+                          if ($result->num_rows > 0){
+                        ?>    
+                    <?php $sql="SELECT * FROM praktika.menu  WHERE title='Neljapäev'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "valik";
+                      } } }
+                    
+                      ?> 
+                      </div> -->
+                     <!-- <div class="underline underline-offset-1 hover:bg-blue-200 text-black-70 w-6"> <a href="">-->
+                     <div class="text-black-700 h-8 w-9">
+                     <select id="mylist" onchange="myFunction()" class='form-control h-6 w-15'>
+                      <?php
+                      $rows=(array) null;
+                    $sql="SELECT DISTINCT valik, valik2 FROM praktika.menu WHERE id=4"; 
+                     $result = $conn -> query ($sql);
+                     while ($row = mysqli_fetch_array($result)) {
+                      $rows[] = $row;
+                  }
+                  foreach ($rows as $row) {
+                    print "<option value=''></option>";
+                    print "<option value='" . $row['valik'] . "'>" . $row['valik'] . "</option>";
+                    print "<option value='" . $row['valik2'] . "'>" . $row['valik2'] . "</option>";
+                }
+                     /* $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                     //foreach($)
+                      while($row = $result->fetch_assoc()) {
+                      echo json_encode($row["valik"]). "<br>";
+                        //  print_r ("". $row["valik"]. "\n <br>");
+                      // print_r("<br>\n". $row["valik2"]. "<br>");
+                      } }
+                    */
+                    //$conn->close();
+                    ?>
+                      </select>
+                    
+                      </div>
+                      
+                      <div class="text-black-700 h-8 w-9">
+                    <select id="mylist1" onchange="myFunction1()" class='form-control h-6 w-15'>
+                      <?php
+                      //$conn = mysqli_connect($servername, $username, $password);
+                    $sql="SELECT poolik_praad FROM praktika.sook"; 
+
+                     $results = $conn -> query ($sql);
+                     while ($row = mysqli_fetch_array($results)) {
+                      $rows[] = $row;
+                    }
+                  foreach ($rows as $row) {
+                    print "<option value='" . $row['poolik_praad']. "'>" . $row['poolik_praad'] . "</option>";
+
+                  }
+                    ?>
+                    </select>
+                    
+                      </div>
+                      </div>
+                      
+                     <!-- </div>
+                      <div class="underline underline-offset-1 hover:bg-blue-200 text-black-70 w-9"> -->
+
+                      
+                      <!-- <?php /*$sql="SELECT * FROM praktika.menu  WHERE title='Esmaspäev'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "". $row["valik2"]. "<br>";
+                      } }*/
+                     
+                      ?>  -->
+                      </div> 
+                      <!--</div> -->
+
+                      <div class="w-9">
+                      <a class="text-black-700 text-xl font-bold text-center" href="" id="myBtn" oneclick="myFunction"><button>OSTA</button></a>
+                      </div>
+
+                      <div class="text-black-300 text-center sm:text-left">
+                    <div class="flex-items-center text-2xl mb-2 text-gray-700 font-bold">Reede-<?php $sql="SELECT * FROM praktika.menu WHERE title='Reede'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "".$row["date"]. "<br>";
+                      }
+                    } else {
+                      echo "0 results";
+                    }
+                      ?>
+                    </div>
+                    </div>
+                    <div class="h-7 font-bold text-xl">
+                    <?php $sql="SELECT * FROM praktika.menu  WHERE title='Reede'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "". $row["praad1"]. "<br><br>";
+                      } }
+                      ?> 
+                      </div>
+                <div class="h-24">
+                <div class="h-7 font-bold text-xl mb-2">
+                    <?php $sql="SELECT * FROM praktika.menu  WHERE title='Reede'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "". $row["praad2"]. "";
+                      } }
+                    
+                      ?> 
+                      </div>
+                      
+                      <p id="demo"></p>
+                      <script>
+                        function myFunction() {
+                          var x = document.getElementById("myBtn")
+                          x.disabled = true;
+                        }
+                      </script>
+                     <div class="h-7 text-xl font-bold">
+                    <div>
+                    <?php $sql="SELECT * FROM praktika.menu  WHERE title='Reede' AND valik IS NULL"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "". $row["praad1"]. "<br><br>";
+                      }
+                    
+                      ?> 
+                      </div>
+                      </div>
+                      </div>
+                      
+                     <div class="flex justify-start h-6"><a class="hover:bg-blue-200 text-black-700 text-center float-left underline underline-offset-1 h-6" href="submit.php" id="myBtn" oneclick="myFunction">BUY-</a>
+                      <?php $sql="SELECT * FROM praktika.menu  WHERE title='Reede' AND valik IS NULL"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                     $sql="SELECT * FROM praktika.sook"; 
+                      $result = $conn->query($sql); 
+                          if ($result->num_rows > 0) {
+                          while($row = $result->fetch_assoc()) {
+                           echo "Täispraad  ";
+                            echo "". $row["tais_praad"]. " <br> ";
+                            echo "Pool praadi";
+                            echo "". $row["poolik_praad"]. " <br><br> ";      } 
+                    }}
+                  } 
+                      ?>
+                      </a>
+                      </div>
+                      
+                    <!-- valik -->
+                      <!-- <div class="h-7 text-xl font-bold">
+                      <?php 
+                          $sql="SELECT * FROM praktika.menu  WHERE title='Reede' AND valik IS NOT NULL"; 
+                          $result = $conn->query($sql);
+                          if ($result->num_rows > 0){
+                        ?>    
+                    <?php $sql="SELECT * FROM praktika.menu  WHERE title='Reede'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "valik";
+                      } } }
+                    
+                      ?> 
+                      </div> -->
+                     <!-- <div class="underline underline-offset-1 hover:bg-blue-200 text-black-70 w-6"> <a href="">-->
+                     <div class="text-black-700 h-8 w-9">
+                     <select id="mylist" onchange="myFunction()" class='form-control h-6 w-15'>
+                      <?php
+                      $rows=(array) null;
+                    $sql="SELECT DISTINCT valik, valik2 FROM praktika.menu WHERE id=5"; 
+                     $result = $conn -> query ($sql);
+                     while ($row = mysqli_fetch_array($result)) {
+                      $rows[] = $row;
+                  }
+                  foreach ($rows as $row) {
+                    print "<option value=''></option>";
+                    print "<option value='" . $row['valik'] . "'>" . $row['valik'] . "</option>";
+                    print "<option value='" . $row['valik2'] . "'>" . $row['valik2'] . "</option>";
+                }
+                     /* $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                     //foreach($)
+                      while($row = $result->fetch_assoc()) {
+                      echo json_encode($row["valik"]). "<br>";
+                        //  print_r ("". $row["valik"]. "\n <br>");
+                      // print_r("<br>\n". $row["valik2"]. "<br>");
+                      } }
+                    */
+                    //$conn->close();
+                    ?>
+                      </select>
+                      </div>
+                      
+                      <div class="text-black-700 h-8 w-9">
+                    <select id="mylist1" onchange="myFunction1()" class='form-control h-6 w-15'>
+                      <?php
+                      //$conn = mysqli_connect($servername, $username, $password);
+                    $sql="SELECT poolik_praad FROM praktika.sook"; 
+
+                     $results = $conn -> query ($sql);
+                     while ($row = mysqli_fetch_array($results)) {
+                      $rows[] = $row;
+                    }
+                  foreach ($rows as $row) {
+                    print "<option value='" . $row['poolik_praad']. "'>" . $row['poolik_praad'] . "</option>";
+                  }
+                  $conn->close();
+                    ?>
+                    </select>
+                      </div>
+                      </div>
+                      
+                     <!-- </div>
+                      <div class="underline underline-offset-1 hover:bg-blue-200 text-black-70 w-9"> -->
+
+                      
+                      <!-- <?php /*$sql="SELECT * FROM praktika.menu  WHERE title='Esmaspäev'"; 
+                     $result = $conn->query($sql);
+                     if ($result->num_rows > 0) {
+                      while($row = $result->fetch_assoc()) {
+                        echo "". $row["valik2"]. "<br>";
+                      } }*/
+                     
+                      ?>  -->
+                      </div> 
+                      <!--</div> -->
+
+                      <div class="w-9">
+                      <a class="text-black-700 text-xl font-bold text-center" href="" id="myBtn" oneclick="myFunction"><button>OSTA</button></a>
+                      </div>
+                </div>  
+              </div>
+            </div>
+    </div>  
+</body>
+</html>
+    
