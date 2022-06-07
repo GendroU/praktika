@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/4ca46a4711.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://www.phptutorial.net/app/css/style.css">
+    <title>Login</title>
+</head>
+<body class="bg-green-300">
+<div class="flex justify-center my-8">
+                <h1 class="text-4xl text-black-700 font-bold">OUMAN</h1>
+            </div>
+<main class="absolute inset-x-0 top-40">
+    <form action="logg.php" method="post">
+        <h1>Login</h1>
+        <div>
+            <label for="text">ID:</label>
+            <input type="text" name="text" id="text">
+        </div>
+        <section>
+            <button class="bg-green-500 hover:bg-green-400" type="submit" name="submit">Login</button>
+        </section>
+    </form>
+</main>
+</body>
+</html>
+<?php //echo $_POST["text"]; ?>
+<?php
+  $kasutaja_sisestus == $_GET['text'];
+
+  
+  require __DIR__ . '/../src/bootstrap.php';
+?>
