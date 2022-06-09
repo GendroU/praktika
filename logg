@@ -1,0 +1,18 @@
+<?php
+require 'db.php';
+?>
+<?php
+
+if(isset($_POST['submit'])){    
+     $toit = $_POST['praad'];
+     $lisand = $_POST['valik'];
+    $sql="INSERT INTO praktika.supp_employee (toit, valik) 
+    VALUES ('$toit','$lisand')";
+     if (mysqli_query($conn, $sql)) {
+        echo "Tellimus lisatud";
+     } else {
+        echo "Error: " . $sql . ":-" . mysqli_error($conn);
+     }
+     mysqli_close($conn);
+}
+?>
